@@ -78,8 +78,5 @@ public class Peliculas {
     public String toString() {
         return Nombre;
     }
-    
-    
    
-    
 }

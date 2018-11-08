@@ -31,7 +31,7 @@ public class Crud {
         }
        
     }
-
+    // Metodos para insertar
     public boolean insertar(String Nombre, String Genero, int Año, String Actor, String Pais) {
         try {
             String query = "INSERT INTO tbl_peliculas (Nom_peli, Gen_peli, Año_peli, Act_peli, Pais_peli) VALUES (?, ?, ?, ?, ?)";
@@ -45,12 +45,11 @@ public class Crud {
             System.out.println("Registro guardado exitosamente");
             return true;
         } catch (Exception e) {
-
             System.out.println(e.getMessage());
             return false;
         }
     }
-
+     // Metodo para actualizar
     public boolean actualizar(int Id, String Nombre, String Genero, int Año, String Actor, String Pais) {
         try {
 
@@ -73,7 +72,7 @@ public class Crud {
             return false;
         }
     }
-
+    // Metodo para Mostrar
     public ResultSet Mostrar() {
         try {
           String quer = "SELECT * FROM tbl_peliculas";
@@ -86,7 +85,7 @@ public class Crud {
             return null;
         }
     }
-       
+   // Metodo para Consulatr
     public ResultSet ConsultarGenero(String genero){
         try {
             String query = "Select * from tbl_peliculas WHERE Gen_peli = ?";
@@ -100,11 +99,4 @@ public class Crud {
         }
     
     };
-    
-    //public static void main(String[] args) {
-       // Crud crd = new Crud();
-        //crd.insertar("Titanic", "Drama", 2017, "Leonardo Dicaprio", "EE.UU");
-       // crd.actualizar(3, "La casa de papel", "Acción", 2001, "Pepe de la oz", "España");
-   // }
-
 }

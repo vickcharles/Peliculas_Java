@@ -21,9 +21,7 @@ public class Conexion {
     private final String pass = "";
 
     private Connection con = null;
-
-    public Conexion() {
-    }
+    public Conexion() {}
 
     public Connection getConexion() {
         try {
@@ -35,10 +33,4 @@ public class Conexion {
         }
         return con;// RETORNAR *CON*
     }
-    
-//    public static void main(String[] args) {
-//        
-//        Conexion cx = new Conexion();
-//        cx.getConexion();
-//    }
 }

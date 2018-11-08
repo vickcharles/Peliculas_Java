@@ -32,7 +32,6 @@ public class View extends javax.swing.JFrame {
         } catch (Exception e) {
         }
          cargarPeliculas();
-    
     }
 
     /**
@@ -386,14 +385,13 @@ public class View extends javax.swing.JFrame {
     
     //Boton para insertar Peliculas 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        
-        
+
         String Nombre = txtNombre_in.getText();
         String Genero = jcbGenero_in.getSelectedItem().toString();
         int ano =  Integer.parseInt(txtAño_in.getText());
         String Actor = txtActor_in.getText();
         String Pais = jcbPais_in.getSelectedItem().toString();
-       {
+        {
             if (crud.insertar(Nombre, Genero, ano, Actor, Pais)) {
                JOptionPane.showMessageDialog(null, "Los datos fueron ingresados a la Base de Datos"); 
             } else {
@@ -428,7 +426,6 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbSeleccionPeliculasActionPerformed
     
        private void cargarPeliculas(){
-        // limpiamos la tabla
         try {
             ResultSet rs = crud.Mostrar();
             while (rs.next()) {
@@ -444,9 +441,6 @@ public class View extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se ha podido cargar las Peliculas");
         }
-    
-    
-    
     }
   
     public static void main(String args[]) {
