@@ -219,6 +219,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar Peliculas"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -256,10 +259,10 @@
                           <Component id="txtNombre_in" max="32767" attributes="0"/>
                           <Component id="txtAño_in" max="32767" attributes="0"/>
                           <Component id="txtActor_in" max="32767" attributes="0"/>
-                          <Component id="jcbPais_in" pref="200" max="32767" attributes="0"/>
+                          <Component id="jcbPais_in" pref="203" max="32767" attributes="0"/>
                           <Component id="jcbGenero_in" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="555" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="552" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>

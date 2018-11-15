@@ -98,5 +98,21 @@ public class Crud {
             return null;
         }
     
-    };
+    }
+    
+    
+    public boolean Eliminar (int Id) {        
+        try {
+            String query = "Delete * from tbl_peliculas WHERE id_peli = ?";
+            pst = con.prepareStatement(query);
+            pst.setInt(1, Id);
+            rs = pst.executeQuery();
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        }
+    
+    }
+   
 }

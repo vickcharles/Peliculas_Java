@@ -33,4 +33,9 @@ public class Conexion {
         }
         return con;// RETORNAR *CON*
     }
+    
+//    public static void main(String[] args) {
+//        Conexion con = new Conexion();
+//        con.getConexion();
+//    }
 }

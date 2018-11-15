@@ -6,6 +6,7 @@
 package peliculas;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,9 +30,10 @@ public class View extends javax.swing.JFrame {
             modelo.addColumn("Año");
             modelo.addColumn("Actor");
             modelo.addColumn("Pais");
+            this.cargarPeliculas();
         } catch (Exception e) {
         }
-         cargarPeliculas();
+         
     }
 
     /**
@@ -147,6 +149,11 @@ public class View extends javax.swing.JFrame {
         jLabel13.setText("Selecione la Pelicula:");
 
         jButton2.setText("Eliminar Peliculas");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -218,9 +225,9 @@ public class View extends javax.swing.JFrame {
                     .addComponent(txtNombre_in)
                     .addComponent(txtAño_in)
                     .addComponent(txtActor_in)
-                    .addComponent(jcbPais_in, 0, 200, Short.MAX_VALUE)
+                    .addComponent(jcbPais_in, 0, 203, Short.MAX_VALUE)
                     .addComponent(jcbGenero_in, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(555, 555, 555))
+                .addGap(552, 552, 552))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -403,12 +410,12 @@ public class View extends javax.swing.JFrame {
     private void jcbSeleccionPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccionPeliculasActionPerformed
            Peliculas peliculas = (Peliculas) jcbSeleccionPeliculas.getSelectedItem();
            if(peliculas == null) {
-             return;
+              return;
            }
            txtId_mo.setText(String.valueOf(peliculas.getId()));
            txtNombre_mo.setText(String.valueOf(peliculas.getNombre()));
            txtActor_mo.setText(String.valueOf(peliculas.getActor()));
-           for (int i = 0; jcbGenero_mo.getItemCount() < 10; i++) {
+           for (int i = 0; i < jcbGenero_mo.getItemCount(); i++) {
                if (peliculas.getGenero().equals(jcbGenero_mo.getItemAt(i).toString())) {
                    jcbGenero_mo.setSelectedIndex(i);
                    break;
@@ -416,30 +423,44 @@ public class View extends javax.swing.JFrame {
            }
            txtAño_mo.setText(String.valueOf(peliculas.getAno()));
            txtActor_mo.setText(String.valueOf(peliculas.getActor()));
-           for (int e = 0; jcbPais_MO.getItemCount() < 10; e++) {
-               if (peliculas.getPais().equals(jcbPais_MO.getItemAt(e).toString())) {
-                   jcbPais_MO.setSelectedIndex(e);
+           for (int i = 0; i < jcbPais_MO.getItemCount(); i++) {
+               if (peliculas.getPais().equals(jcbPais_MO.getItemAt(i).toString())) {
+                   jcbPais_MO.setSelectedIndex(i);
                    break;
                }
             
         }
     }//GEN-LAST:event_jcbSeleccionPeliculasActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         Peliculas peliculas = (Peliculas) jcbSeleccionPeliculas.getSelectedItem();
+           if(peliculas == null) {
+              return;
+           }
+           if (crud.Eliminar(peliculas.getId())) {
+               JOptionPane.showMessageDialog(null, "Se elimino la pelicula");
+            
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
     
-       private void cargarPeliculas(){
+       private void cargarPeliculas() {
+      
         try {
             ResultSet rs = crud.Mostrar();
             while (rs.next()) {
-            Object row [] = new Object[6];      
-                for (int i = 0; i < 6; i++) {
-                    row[i] = rs.getObject(i+1);
-                    
+                Object row [] = new Object[6];      
+                    for (int i = 0; i < 6; i++) {
+                    row[i] = rs.getObject(i+1);                  
                 }
-                jcbSeleccionPeliculas.addItem(new Peliculas(Integer.parseInt(row[0].toString()), row[1].toString(), row[2].toString(), Integer.parseInt(row[3].toString()), row[4].toString(), row[5].toString()));
-                jcbSeleccionPeliculas_eli.addItem(rs.getString(("Nom_peli")));
+               
+                modelo.addRow(row);
                 
+                jcbSeleccionPeliculas.addItem(new Peliculas(Integer.parseInt(row[0].toString()), row[1].toString(), row[2].toString(), Integer.parseInt(row[3].toString()), row[4].toString(), row[5].toString()));
+                jcbSeleccionPeliculas_eli.addItem(new Peliculas(Integer.parseInt(row[0].toString()), row[1].toString(), row[2].toString(), Integer.parseInt(row[3].toString()), row[4].toString(), row[5].toString()));  
+                 System.out.println(rs.getString("Nom_peli"));
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No se ha podido cargar las Peliculas");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos en la base de datos");
         }
     }
   
@@ -466,7 +487,7 @@ public class View extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
